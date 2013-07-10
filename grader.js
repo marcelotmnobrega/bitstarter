@@ -19,23 +19,23 @@ var cheerioHtmlFile = function(htmlfile) {
 };
 
 var downloadFile = function(url) {
-  console.log('downloadFile: ' + url);
+  //console.log('downloadFile: ' + url);
   rest.get(url).on('complete', function(result) {
       if (result instanceof Error) {
          console.error('Error: ' + result.message);
          this.retry(5000);  //try again in 5 sec
       } else {
-         console.log('result: ' + result);
+         //console.log('result: ' + result);
          fs.writeFile(DOWNLOAD_FILE_PATH, result, function(err) {
              if (err) throw err;
-             console.log('Saved!');
+             //console.log('Saved!');
          });
       }
   });
 }
 
 var cheerioURL = function(url) {
-console.log('cheerioURL ' + url);
+    //console.log('cheerioURL ' + url);
     downloadFile(url);
     return cheerio.load(fs.readFileSync(DOWNLOAD_FILE_PATH));
 };
